@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WorkforceIQ - Full Project Report</title>
+    <style>
+      :root {
+        --bg: #f5f7fb;
+        --paper: #ffffff;
+        --ink: #111827;
+        --muted: #4b5563;
+        --line: #e5e7eb;
+        --accent: #0f766e;
+        --accent-2: #1d4ed8;
+        --soft: #f3f4f6;
+        --warn: #b45309;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.6;
+      }
+      .page {
+        max-width: 1100px;
+        margin: 36px auto;
+        background: var(--paper);
+        border: 1px solid var(--line);
+        box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+        padding: 48px 52px;
+      }
+      h1, h2, h3, h4 { margin-top: 0; color: var(--ink); }
+      h1 { font-size: 32px; margin-bottom: 8px; }
+      .subtitle {
+        font-size: 18px;
+        color: var(--muted);
+        margin-bottom: 16px;
+      }
+      .meta {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+        gap: 12px 16px;
+        margin: 22px 0 28px;
+        padding: 18px 20px;
+        background: var(--soft);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+      }
+      .meta div strong {
+        display: block;
+        color: var(--accent);
+        margin-bottom: 4px;
+      }
+      .section {
+        margin-top: 28px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+      }
+      ul, ol { margin-top: 10px; margin-bottom: 0; padding-left: 20px; }
+      li { margin-bottom: 8px; }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+        font-size: 14px;
+      }
+      th, td {
+        padding: 9px 10px;
+        border: 1px solid var(--line);
+        vertical-align: top;
+        text-align: left;
+      }
+      th {
+        background: #f8fafc;
+        color: var(--accent-2);
+      }
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+      .box {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 14px 16px;
+        background: #fff;
+      }
+      .accent { color: var(--accent); font-weight: bold; }
+      .muted { color: var(--muted); }
+      .warning {
+        border-left: 4px solid var(--warn);
+        background: #fff7ed;
+        padding: 12px 14px;
+        margin-top: 12px;
+        color: #7c2d12;
+      }
+      .footer {
+        margin-top: 32px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      @media (max-width: 800px) {
+        .page { margin: 18px; padding: 24px 20px; }
+        .meta, .two-col { grid-template-columns: 1fr; }
+        table { font-size: 12px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <h1>WorkforceIQ</h1>
+      <div class="subtitle">AI-powered restaurant workforce and operations planning system</div>
+
+      <div class="meta">
+        <div>
+          <strong>Repository</strong>
+          prathamgosai/staff--management
+        </div>
+        <div>
+          <strong>Project Type</strong>
+          pnpm monorepo (Turborepo)
+        </div>
+        <div>
+          <strong>Technologies</strong>
+          Next.js, NestJS, Postgres, Redis, Python FastAPI
+        </div>
+        <div>
+          <strong>Business Domain</strong>
+          Multi-outlet restaurant workforce management
+        </div>
+        <div>
+          <strong>Deployment</strong>
+          Render-based production deployment
+        </div>
+        <div>
+          <strong>Default Branch</strong>
+          backup-perf-8f77934
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>1. Executive Summary</h2>
+        <p>
+          WorkforceIQ is a staff management platform for multi-outlet operations. It covers scheduling, attendance,
+          leave, allocation, staff documents, outlet capacity planning, and demand forecasting. The system is built as a
+          monorepo with separate web, API, and ML components, and is designed specifically for restaurant operations.
+        </p>
+        <p>
+          It supports employee directory management, outlet and department structures, staffing ratios, roster publishing,
+          approvals, role-based permissions, notifications, and operational dashboards. The project includes a documented
+          implementation roadmap, multiple migration phases, and a clear set of feature milestones and work reports.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>2. Problem It Solves</h2>
+        <p>
+          The project addresses common workforce and operational problems in hospitality businesses including:
+        </p>
+        <ul>
+          <li>Manual and inconsistent scheduling across multiple outlets</li>
+          <li>Incomplete visibility into staffing requirements vs. actual deployment</li>
+          <li>Difficulty monitoring attendance, leave, and approvals</li>
+          <li>Need for role-based access across employee, chef, HR, admin, and supervisory roles</li>
+          <li>Limited forecasting and capacity planning for demand-driven staffing</li>
+          <li>Compliance and document management for employee records</li>
+          <li>Need for in-app, email, and WhatsApp notification orchestration</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>3. Product Scope</h2>
+        <ul>
+          <li>Staff directory, employee profile, role assignment, and account administration</li>
+          <li>Outlet management and per-outlet scoping</li>
+          <li>Department and post assignment</li>
+          <li>Weekly roster creation and publishing</li>
+          <li>Attendance logging and kiosk-based clock-in support</li>
+          <li>Leave workflows and approvals</li>
+          <li>Allocation planning and staffing assignment</li>
+          <li>Capacity planning for dine-in outlets and staffing ratios</li>
+          <li>Staff document vault with audit and versioning support</li>
+          <li>Forecasting, predictions, and transfer recommendations</li>
+          <li>Dashboard views for operational and staffing health</li>
+          <li>Notification system with RBAC-aware recipient logic</li>
+          <li>Authenticated employee self-service pages and mobile navigation</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>4. Core Architecture</h2>
+        <div class="two-col">
+          <div class="box">
+            <h3>Application Layers</h3>
+            <ul>
+              <li><span class="accent">Web</span>: Next.js 14 + React 18 + Tailwind + TanStack Query + Zustand</li>
+              <li><span class="accent">API</span>: NestJS TypeScript + PostgreSQL + Redis + Bull</li>
+              <li><span class="accent">ML Service</span>: Python FastAPI for forecasting and staffing insights</li>
+              <li><span class="accent">Shared</span>: Reusable types and constants in packages/shared</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Operational Model</h3>
+            <ul>
+              <li>Database hosted on Supabase Postgres 16</li>
+              <li>Redis used for queue processing and notifications</li>
+              <li>Manual migration workflow with numbered SQL files</li>
+              <li>Role and outlet scoping enforced at server side</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>5. Technical Stack</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Layer</th>
+              <th>Stack</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Web</td>
+              <td>Next.js 14, React 18, Tailwind, TanStack Query v5, Zustand, Radix UI, Recharts, FullCalendar, dnd-kit, react-hook-form, zod</td>
+            </tr>
+            <tr>
+              <td>API</td>
+              <td>NestJS, TypeScript, raw pg Pool, PostgreSQL 16, Redis + legacy Bull</td>
+            </tr>
+            <tr>
+              <td>ML</td>
+              <td>Python FastAPI forecasting service, phase-1 rule-based live logic, phase-2 stubbed for Prophet/XGBoost</td>
+            </tr>
+            <tr>
+              <td>Shared</td>
+              <td>packages/shared for enums, constants, RBAC definitions, and shared TS contracts</td>
+            </tr>
+            <tr>
+              <td>Auth & Security</td>
+              <td>JWT, refresh token rotation, throttling, password change enforcement, RBAC checks</td>
+            </tr>
+            <tr>
+              <td>Notifications</td>
+              <td>WhatsApp via Meta Graph API, email via SendGrid/SES, in-app notifications</td>
+            </tr>
+            <tr>
+              <td>Database</td>
+              <td>PostgreSQL 16, UUID keys, tenant-aware data model, migration-based schema evolution</td>
+            </tr>
+            <tr>
+              <td>Frontend UX</td>
+              <td>Light/dark mode, PWA support, mobile bottom tabs, locale support, print-friendly roster</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <h2>6. Repository Structure</h2>
+        <ul>
+          <li><span class="accent">apps/web</span> — Next.js web application</li>
+          <li><span class="accent">apps/api</span> — NestJS API backend</li>
+          <li><span class="accent">apps/ml-service</span> — Python forecasting microservice</li>
+          <li><span class="accent">packages/shared</span> — shared business contracts and utilities</li>
+          <li><span class="accent">assets/db</span> — numbered SQL migrations and rollbacks</li>
+          <li><span class="accent">docs</span> — project documentation, statuses, plans, and design notes</li>
+          <li><span class="accent">scripts</span> — repo automation and helper scripts</li>
+          <li><span class="accent">render.yaml</span> — Render deployment blueprint</li>
+          <li><span class="accent">README.md</span> — system overview and setup instructions</li>
+          <li><span class="accent">PROJECT_STATUS.md</span> — feature history and detailed delivery report</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>7. Functional Modules</h2>
+        <p>The project includes a rich set of feature modules and API domains:</p>
+        <ul>
+          <li>auth</li>
+          <li>staff</li>
+          <li>staff-documents</li>
+          <li>outlet</li>
+          <li>capacity</li>
+          <li>restaurant-config</li>
+          <li>staffing</li>
+          <li>predictions</li>
+          <li>transfer-recommendations</li>
+          <li>department</li>
+          <li>scheduling</li>
+          <li>attendance</li>
+          <li>leave</li>
+          <li>allocation</li>
+          <li>forecasting</li>
+          <li>notifications</li>
+          <li>dashboard</li>
+          <li>roles</li>
+          <li>me</li>
+          <li>kiosk</li>
+          <li>public</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>8. Main Features Delivered</h2>
+        <ul>
+          <li>Employee directory with real staff data and profile management</li>
+          <li>Weekly roster generation with shift templates and overrides</li>
+          <li>Manual shift moves and publishing controls</li>
+          <li>Role-based access control with editable permissions matrix</li>
+          <li>Employee self-service dashboard and mobile-friendly navigation</li>
+          <li>Notification engine for in-app, email, and WhatsApp delivery</li>
+          <li>Outlets with server-side scoping and operations filters</li>
+          <li>Capacity planning based on tables, max pax, and staffing ratios</li>
+          <li>Staff document vault with masked Aadhaar handling and versioned documents</li>
+          <li>Kiosk clock-in support with device enrollments and PIN role</li>
+          <li>Magic-link weekly view for employees</li>
+          <li>Internationalization support in English, Gujarati, and Hindi</li>
+          <li>PWA install support and offline-friendly app behavior</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>9. Workforce Intelligence Extension</h2>
+        <p>The project includes a structured Workforce-Intelligence extension with multiple phases:</p>
+        <ul>
+          <li><strong>Phase 0</strong> — Discovery and planning</li>
+          <li><strong>Phase 1</strong> — Employee Documents module</li>
+          <li><strong>Phase 2</strong> — Restaurant configuration and staffing ratios</li>
+          <li><strong>Phase 3</strong> — Real-time staffing engine and company dashboard</li>
+          <li><strong>Phase 4</strong> — Staff predictor and transfer recommendations</li>
+          <li><strong>Phase 5</strong> — Performance pass, seed data, and documentation improvements</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>10. Security and Compliance Notes</h2>
+        <ul>
+          <li>JWT + refresh-token rotation is implemented for secure authentication</li>
+          <li>Rate limiting is configured for login and global API traffic</li>
+          <li>Server-side outlet scoping prevents cross-outlet unauthorized access</li>
+          <li>Role-based permission enforcement is part of the request flow</li>
+          <li>Aadhaar is designed to be masked to the last four digits and stored carefully</li>
+          <li>Document encryption and access logging are part of the advanced document module</li>
+          <li>Credential hygiene and secret rotation are highlighted as operational best practices</li>
+        </ul>
+        <div class="warning">
+          Security and credentials are intentionally tracked in documentation, but raw secrets are not committed to the repository.
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>11. System Workflows</h2>
+        <h3>Scheduling Workflow</h3>
+        <ul>
+          <li>Generate or maintain weekly shift templates</li>
+          <li>Apply outlet and staff-specific restrictions</li>
+          <li>Allow manager adjustments and manual shift edits</li>
+          <li>Publish roster to employees and notify relevant stakeholders</li>
+        </ul>
+
+        <h3>Attendance Workflow</h3>
+        <ul>
+          <li>Clock-in and clock-out records are captured</li>
+          <li>Kiosk devices can be enrolled for front-of-house and staff access</li>
+          <li>Source tracking distinguishes standard vs. kiosk attendance methods</li>
+        </ul>
+
+        <h3>Leave Workflow</h3>
+        <ul>
+          <li>Employees submit leave requests</li>
+          <li>Managers review and approve or reject</li>
+          <li>Notifications are triggered to the relevant parties</li>
+        </ul>
+
+        <h3>Notification Workflow</h3>
+        <ul>
+          <li>Events are emitted from business actions</li>
+          <li>Recipients are resolved by role, outlet scope, and preferences</li>
+          <li>Messages are delivered through in-app, email, or WhatsApp if enabled</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>12. Database and Migration Strategy</h2>
+        <p>The project uses a database-first approach with numbered migration files under the assets/db folder.</p>
+        <ul>
+          <li>Schema evolution is handled by incremental numbered SQL files</li>
+          <li>Each migration may have a matching rollback file</li>
+          <li>DB migrations are manually applied and not fully wired into a generic runner at the repo root</li>
+          <li>Supabase Postgres is used for the hosted environment, with session pooler configuration</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>13. Deployment Architecture</h2>
+        <p>Production is configured for Render with a render.yaml deployment blueprint. The setup involves:</p>
+        <ul>
+          <li>PostgreSQL service</li>
+          <li>Redis service</li>
+          <li>API deployment</li>
+          <li>Web frontend deployment</li>
+          <li>Environment configuration using .env values</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>14. Development Setup</h2>
+        <p>Project instructions emphasize Windows-first local development and Node 20 compatibility.</p>
+        <ul>
+          <li>Node.js 20 required (not 23/24) due to Next.js 14 dev constraints</li>
+          <li>pnpm >= 9 required</li>
+          <li>PostgreSQL 16 required</li>
+          <li>Redis required for Bull queues</li>
+          <li>Commands include: pnpm install, pnpm dev, pnpm build, pnpm lint, pnpm test, pnpm typecheck</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>15. Default Login and Environment Notes</h2>
+        <p>The documentation indicates a default admin login pattern, but credentials are treated as operational secrets and are never committed to git.</p>
+        <ul>
+          <li>Primary admin identity: admin@workforceiq.app</li>
+          <li>HR admin examples are present in project docs for operational setup</li>
+          <li>Environment variables include DB, Redis, JWT, refresh, email, and document security settings</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>16. Notable Implementation Milestones</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Milestone</th>
+              <th>Summary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Monorepo Foundation</td>
+              <td>API, web, ML, DB schema scaffolded</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Staff management basics</td>
+              <td>Profile, contact, approval, attendance, permissions</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>RBAC and account control</td>
+              <td>Super-admin, hr, employee, etc., role matrix and admin pages</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Scheduling and notifications</td>
+              <td>Roster publish flow, in-app bell, email/WhatsApp notifications</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>PWA and UX</td>
+              <td>Installability, mobile nav, localization, print roster</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Capacity and documents</td>
+              <td>Staff documents, outlet capacity, ratios, planning</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Forecasting</td>
+              <td>Demand forecasting, staffing suggestions, recommendations</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Workforce Intelligence</td>
+              <td>Prediction engine, transfer planning, dashboard enhancement</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <h2>17. Known Gaps and Open Items</h2>
+        <ul>
+          <li>Some database migrations were manual and must be applied in order</li>
+          <li>Forecasting is phase-1 only and not full ML model-based production yet</li>
+          <li>Phase-2 and later AI features require additional environmental configuration</li>
+          <li>Some UI translations need human review</li>
+          <li>Notification delivery depends on external providers and env flags</li>
+          <li>Production behavior still depends on environment-specific configuration and operational checks</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>18. Business Value Summary</h2>
+        <p>
+          WorkforceIQ is positioned as a practical software system for restaurant groups that want a single source of truth
+          for workforce management. It reduces the gap between staffing needs and actual deployment while enabling deeper
+          operational oversight, staff self-service, and managerial decision support. The project combines staffing operations,
+          compliance, forecasting, and notifications into a consolidated system.
+        </p>
+      </div>
+
+      <div class="section">
+        <h2>19. Final Summary</h2>
+        <p>
+          This project is a large, production-oriented workforce management system built for restaurant operations. It includes
+          a web app, API, ML service, SQL migrations, deployment configuration, and a detailed architecture report. The codebase
+          is designed for multi-outlet staffing management, operational visibility, and data-driven decision making across HR,
+          management, and employee workflows.
+        </p>
+      </div>
+
+      <div class="footer">
+        WorkforceIQ Project Report • Printable summary for PDF export
+      </div>
+    </div>
+  </body>
+</html>
